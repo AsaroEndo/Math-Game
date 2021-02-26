@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>Math Game</title>
+</head>
+*{
+  padding: 0;
+  margin: 0;
+}
+body{
+  font-family: 'default';
+  background-color: #E6E6EA;
+}
+
+.container{
+  padding: 15px;
+  overflow: hidden;
+  background-color:#FE4A49;
+  
+}
+.container h1{
+  float: left;
+  margin-left: 5%;
+  color: white;
+}
+
+.container ul{
+  list-style-type: none;
+  font-size: 20px;
+  margin-left: 80%;
+}
+.container li{
+  margin-top: 10px;
+  float: left;
+  padding: 0 20px 0 20px;
+}
+.container a{
+  text-decoration: none;
+  color: white;
+}
+
+.current a::after{
+  content: '-';
+  font-size: 4px;
+  background-color: white;
+  display: block;
+}
+.wrapper{
+  display: grid;
+  grid-template-columns: 82% 18%;
+
+}
+.equation{
+  font-size: 67px;
+  background-color: white;
+  border-radius: 3px;
+  text-align: center;
+  padding-top: 15%;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.equation h1{
+  display: inline;
+  padding: 20px;
+}
+
+.answer-options{
+  font-size: 67px;
+  margin-right: 10px;
+}
+.answer-options h1{
+  cursor: pointer;
+  color: whitesmoke;
+  border-radius: 3px;
+  margin-top: 10px;
+  text-align: center;
+  width: 100%;
+}
+
+#option1{
+  background-color: #FE4A49;;
+  color: white;
+  transition: 1s;
+}
+#option1:hover{
+  color: #FE4A49;
+  background: white;
+}
+#option2{
+  background-color: #2AB7CA;
+  color: white;
+  transition: 1s;
+}
+#option2:hover{
+  color: #2AB7CA;
+  background: white;
+}
+#option3{
+  background-color: #FED766;
+  color: white;
+  transition: 1s;
+}
+#option3:hover{
+  color: #FED766;
+  background: white;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+}
+.game{
+    width: 1000px;
+    height: 200px;
+    border: 5px solid black;
+    margin: auto;
+}
+#character{
+    width: 20px;
+    height: 50px;
+    background-color: red;
+    position:relative;
+    top: 150px;
+}
+.animate{
+    animation: jump 0.3s linear;
+}
+@keyframes jump{
+    0%{top: 150px;}
+    30%{top: 100px;}
+    70%{top: 100px;}
+    100%{top: 150px;}
+}
+
+#block{
+    background-color: blue;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: 130px;
+    left: 500px;
+    animation: block 2s infinite linear;
+}
+@keyframes block{
+    0%{left: 1000px}
+    100%{left: -20px}
+}
+p{
+    text-align: center;
+}
+
+<body>
+<header>
+    <div class="container">
+      <h1>MATH WIZARD</h1>
+      <ul>
+        <li class="current"><a href="add.html">ADD</a></li>
+        <li><a href="subtract.html">SUBTRACT</a></li>
+      </ul>
+    </div>
+  </header>
+  
+  <div class="game">
+        <div id="character"></div>
+        <div id="block"></div>
+    </div>
+	
+ <div class="wrapper">
+      <div class="equation">
+        <h1  id="value1" style="color:#FE4A49">1</h1>
+        <h1 style="color: #2AB7CA;">+</h1>
+        <h1  id="value2" style="color: #FED766">1</h1>
+        <h1  style="color: #F86624">=</h1>
+        <h1  style="color: gray">?</h1>
+</div>
+
+      <div class="answer-options">
+        <h1 id="option1">1</h1>
+        <h1 id="option2">2</h1>
+        <h1 id="option3">3</h1>
+      </div>
+
+<Script>
+const option1 = document.getElementById("option1");
+const option2 = document.getElementById("option2");
+const option3 = document.getElementById("option3");
+var x = document.getElementById("myAudio"); 
+var answer = 0;
+
+function random_equation(){ 
+  var val1 = Math.floor(Math.random() * 13); 
+  var val2 = Math.floor(Math.random() * 13);
+  var dummyAnswer1 = Math.floor(Math.random() * 10);
+  var dummyAnswer2 = Math.floor(Math.random() * 10);
+  var random = [];
+  answer = eval(val1 + val2);
+  
+  document.getElementById("value1").innerHTML = val1; 
+  document.getElementById("value2").innerHTML = val2; 
+
+  var randomAnswers = [answer, dummyAnswer1, dummyAnswer2];
+
+  for (var randomAnswers = [answer, dummyAnswer1, dummyAnswer2], i = randomAnswers.length; i--;){
+    random.push(randomAnswers.splice(Math.floor(Math.random() * (i + 1)), 1)[0]);
+  };
+
+  option1.innerHTML = random[0];
+  option2.innerHTML = random[1];
+  option3.innerHTML = random[2]; 
+
+};
+
+option1.addEventListener("click", function(){
+    if(option1.innerHTML == answer){
+      random_equation(); jump();
+    }
+    else{
+      x.play();
+    }
+});
+option2.addEventListener("click", function(){
+    if(option2.innerHTML == answer){
+      random_equation(); jump();
+    }
+    else{
+      x.play();
+    }
+});
+option3.addEventListener("click", function(){
+    if(option3.innerHTML == answer){
+      random_equation(); jump();
+    }
+    else{
+      x.play();
+    }
+});
+
+random_equation()
+
+
+var character = document.getElementById("character");
+var block = document.getElementById("block");
+var counter=0;
+function jump(){
+    if(character.classList == "animate"){return}
+    character.classList.add("animate");
+    setTimeout(function(){
+        character.classList.remove("animate");
+    },300);
+}
+var checkDead = setInterval(function() {
+    let characterTop = parseInt(window.getComputedStyle(character).getPropertyValue("top"));
+    let blockLeft = parseInt(window.getComputedStyle(block).getPropertyValue("left"));
+    if(blockLeft<20 && blockLeft>-20 && characterTop>=130){
+        block.style.animation = "none";
+        alert("Game Over");
+        
+		
+        block.style.animation = "block 2s infinite linear";
+    }else{
+        counter++;
+        document.getElementById("scoreSpan").innerHTML = Math.floor(counter/100);
+    }
+}, 10);
+
+</script>
+</body>
+</html>
